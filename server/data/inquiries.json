@@ -1,0 +1,81 @@
+[
+  {
+    "id": "INQ-095718",
+    "name": "Rahul Sharma",
+    "phone": "+91 98765 43210",
+    "email": "",
+    "visaType": "Work visa",
+    "destination": "Europe and Schengen",
+    "education": "",
+    "experience": "",
+    "timeSlot": "9AM - 12PM",
+    "message": "Inquiry test",
+    "status": "New",
+    "createdAt": "2026-10-20T20:48:50.958Z"
+  },
+  {
+    "id": "INQ-959147",
+    "name": "Rahul Verma",
+    "phone": "+919876543210",
+    "email": "",
+    "visaType": "Work visa",
+    "destination": "Europe and Schengen",
+    "education": "",
+    "experience": "",
+    "message": "Interested in work visa consultation.",
+    "status": "New",
+    "createdAt": "2026-10-19T20:30:19.591Z"
+  },
+  {
+    "id": "INQ-409676",
+    "name": "Sunil Rawat",
+    "phone": "9876543210",
+    "email": "sunil@gmail.com",
+    "visaType": "Work visa",
+    "destination": "Europe and Schengen",
+    "education": "",
+    "experience": "",
+    "message": "Looking for European logistics job",
+    "status": "New",
+    "createdAt": "2026-10-19T20:01:14.096Z"
+  },
+  {
+    "id": "INQ-1001",
+    "name": "Vikram Choudhary",
+    "phone": "+91 98765 43210",
+    "email": "vikram.choudhary@example.com",
+    "visaType": "Work visa",
+    "destination": "Germany",
+    "experience": "5 years in CNC & Industrial Mechanical",
+    "education": "Diploma in Mechanical Engineering",
+    "message": "Looking for skilled worker opportunities in Germany. I have basic A1 German language certification and 5 years experience.",
+    "status": "New",
+    "createdAt": "2026-10-18T10:30:00.000Z"
+  },
+  {
+    "id": "INQ-1002",
+    "name": "Pooja Sharma",
+    "phone": "+91 98112 34567",
+    "email": "pooja.sharma@example.com",
+    "visaType": "Study visa",
+    "destination": "United Kingdom",
+    "experience": "Fresher",
+    "education": "B.Com (Hons) with 74%",
+    "message": "Seeking admission in MSc International Business or Finance for upcoming intake. IELTS score 7.0 overall.",
+    "status": "Contacted",
+    "createdAt": "2026-10-19T14:15:00.000Z"
+  },
+  {
+    "id": "INQ-1003",
+    "name": "Harpreet Singh",
+    "phone": "+91 99887 76655",
+    "email": "harpreet.singh@example.com",
+    "visaType": "Work visa",
+    "destination": "Poland and Schengen",
+    "experience": "4 years Heavy Vehicle / Logistics",
+    "education": "Senior Secondary + Commercial Driving Licence",
+    "message": "Interested in logistics and warehouse driver permits in Poland or Schengen area.",
+    "status": "Assessment Scheduled",
+    "createdAt": "2026-10-19T18:40:00.000Z"
+  }
+]
