@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, CheckCircle, Send, PhoneCall } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { submitInquiry } from '../api';
 
 export default function ConsultationModal({ isOpen, onClose, defaultVisaType = 'Work visa', defaultDestination = 'Europe and Schengen' }) {
   const [formData, setFormData] = useState({
@@ -27,18 +28,7 @@ export default function ConsultationModal({ isOpen, onClose, defaultVisaType = '
     setError('');
 
     try {
-      const res = await fetch('/api/inquiries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || 'Failed to submit consultation request');
-      }
-
+      await submitInquiry(formData);
       setSuccess(true);
       // Trigger confetti celebration
       try {

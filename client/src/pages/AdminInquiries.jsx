@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Filter, RefreshCw, Trash2, CheckCircle, Clock, Phone, Mail, User, Shield } from 'lucide-react';
+import { getInquiries, updateInquiryStatus, deleteInquiry as removeInquiryApi } from '../api';
 
 export default function AdminInquiries() {
   const [inquiries, setInquiries] = useState([]);
@@ -12,14 +13,10 @@ export default function AdminInquiries() {
   const fetchInquiries = async () => {
     setLoading(true);
     try {
-      let url = '/api/inquiries';
-      const params = new URLSearchParams();
-      if (statusFilter !== 'all') params.append('status', statusFilter);
-      if (searchTerm) params.append('search', searchTerm);
-      if (params.toString()) url += `?${params.toString()}`;
-
-      const res = await fetch(url);
-      const data = await res.json();
+      const data = await getInquiries({
+        status: statusFilter,
+        search: searchTerm
+      });
       setInquiries(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error('Error fetching inquiries:', err);
@@ -39,16 +36,10 @@ export default function AdminInquiries() {
 
   const updateStatus = async (id, newStatus) => {
     try {
-      const res = await fetch(`/api/inquiries/${id}/status`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: newStatus })
-      });
-      if (res.ok) {
-        setNotification(`Inquiry ${id} status updated to ${newStatus}`);
-        setTimeout(() => setNotification(''), 3000);
-        fetchInquiries();
-      }
+      await updateInquiryStatus(id, newStatus);
+      setNotification(`Inquiry ${id} status updated to ${newStatus}`);
+      setTimeout(() => setNotification(''), 3000);
+      fetchInquiries();
     } catch (err) {
       console.error('Error updating status:', err);
     }
@@ -57,14 +48,10 @@ export default function AdminInquiries() {
   const deleteInquiry = async (id) => {
     if (!window.confirm(`Are you sure you want to delete inquiry ${id}?`)) return;
     try {
-      const res = await fetch(`/api/inquiries/${id}`, {
-        method: 'DELETE'
-      });
-      if (res.ok) {
-        setNotification(`Inquiry ${id} removed`);
-        setTimeout(() => setNotification(''), 3000);
-        fetchInquiries();
-      }
+      await removeInquiryApi(id);
+      setNotification(`Inquiry ${id} removed`);
+      setTimeout(() => setNotification(''), 3000);
+      fetchInquiries();
     } catch (err) {
       console.error('Error deleting inquiry:', err);
     }

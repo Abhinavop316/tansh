@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getPageData, enhance, IMGS } from './siteEngine';
+import { submitInquiry } from './api';
 
 export default function App() {
   const [currentHash, setCurrentHash] = useState(() => window.location.hash || '#/');
@@ -55,11 +56,7 @@ export default function App() {
         const m = form.querySelector('#m')?.value || '';
 
         try {
-          await fetch('/api/inquiries', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: n, phone: p, visaType: v, timeSlot: ts, message: m })
-          });
+          await submitInquiry({ name: n, phone: p, visaType: v, timeSlot: ts, message: m });
         } catch (err) {
           console.error('Inquiry submission error:', err);
         }

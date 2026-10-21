@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, MessageCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { siteData } from '../data/siteData';
+import { submitInquiry } from '../api';
 
 export default function Contact() {
   const { company } = siteData;
@@ -29,17 +30,7 @@ export default function Contact() {
     setError('');
 
     try {
-      const res = await fetch('/api/inquiries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || 'Failed to submit enquiry');
-      }
-
+      await submitInquiry(formData);
       setSuccess(true);
       try {
         confetti({ particleCount: 90, spread: 70, origin: { y: 0.6 } });
