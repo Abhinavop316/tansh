@@ -28,7 +28,13 @@ export default function ConsultationModal({ isOpen, onClose, defaultVisaType = '
     setError('');
 
     try {
-      await submitInquiry(formData);
+      const payload = {
+        ...formData,
+        destination: (formData.destination === 'Other' && formData.customCountry?.trim())
+          ? formData.customCountry.trim()
+          : formData.destination
+      };
+      await submitInquiry(payload);
       setSuccess(true);
       // Trigger confetti celebration
       try {
@@ -169,23 +175,40 @@ export default function ConsultationModal({ isOpen, onClose, defaultVisaType = '
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Preferred Destination</label>
+                  <label className="form-label">Which Country Visa? *</label>
                   <select 
                     className="form-select"
                     value={formData.destination}
                     onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
                   >
                     <option value="Europe and Schengen">Europe & Schengen</option>
-                    <option value="Gulf Countries">Gulf Countries (UAE, Saudi, Qatar)</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Poland">Poland</option>
+                    <option value="United Kingdom">United Kingdom (UK)</option>
                     <option value="Canada">Canada</option>
-                    <option value="United Kingdom">United Kingdom</option>
                     <option value="Australia">Australia</option>
                     <option value="New Zealand">New Zealand</option>
-                    <option value="Asia">Asia (Malaysia, Singapore)</option>
                     <option value="United States">USA / North America</option>
+                    <option value="Gulf Countries">Gulf Countries (UAE, Saudi, Qatar)</option>
+                    <option value="Asia">Asia (Malaysia, Singapore)</option>
+                    <option value="Other">Other Country (Specify)</option>
                   </select>
                 </div>
               </div>
+
+              {formData.destination === 'Other' && (
+                <div className="form-group">
+                  <label className="form-label">Specify Country Name *</label>
+                  <input 
+                    type="text" 
+                    className="form-input" 
+                    required 
+                    placeholder="e.g. Malta, Croatia, Portugal, Dubai..."
+                    value={formData.customCountry || ''}
+                    onChange={(e) => setFormData({ ...formData, customCountry: e.target.value })}
+                  />
+                </div>
+              )}
 
               <div className="form-group">
                 <label className="form-label">Time Slot to Talk</label>

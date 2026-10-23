@@ -1,5 +1,47 @@
 [
   {
+    "id": "INQ-087426",
+    "name": "abhinav sharma",
+    "phone": "+917982547576",
+    "email": "",
+    "visaType": "Work visa",
+    "destination": "Europe and Schengen",
+    "education": "",
+    "experience": "",
+    "timeSlot": "9:00 AM - 12:00 PM",
+    "message": "thanku",
+    "status": "New",
+    "createdAt": "2026-10-23T06:23:50.874Z"
+  },
+  {
+    "id": "INQ-527436",
+    "name": "abhinav sharma",
+    "phone": "+917982547576",
+    "email": "",
+    "visaType": "Work visa",
+    "destination": "Europe and Schengen",
+    "education": "",
+    "experience": "",
+    "timeSlot": "9:00 AM - 12:00 PM",
+    "message": "Hello",
+    "status": "New",
+    "createdAt": "2026-10-22T02:46:25.274Z"
+  },
+  {
+    "id": "INQ-771615",
+    "name": "abhinav sharma",
+    "phone": "+917982547576",
+    "email": "",
+    "visaType": "Work visa",
+    "destination": "Europe and Schengen",
+    "education": "",
+    "experience": "",
+    "timeSlot": "9:00 AM - 12:00 PM",
+    "message": "hello",
+    "status": "New",
+    "createdAt": "2026-10-21T04:34:37.716Z"
+  },
+  {
     "id": "INQ-095718",
     "name": "Rahul Sharma",
     "phone": "+91 98765 43210",

@@ -52,11 +52,18 @@ export default function App() {
         const n = form.querySelector('#n')?.value || '';
         const p = form.querySelector('#p')?.value || '';
         const v = form.querySelector('#v')?.value || 'Work visa';
+        let d = form.querySelector('#d')?.value || form.querySelector('#country')?.value || 'Europe and Schengen';
+        const cd = form.querySelector('#cd')?.value?.trim();
+        if (d === 'Other' && cd) {
+          d = cd;
+        } else if (cd && d !== cd) {
+          d = `${d} - ${cd}`;
+        }
         const ts = form.querySelector('#ts')?.value || '9:00 AM - 12:00 PM';
         const m = form.querySelector('#m')?.value || '';
 
         try {
-          await submitInquiry({ name: n, phone: p, visaType: v, timeSlot: ts, message: m });
+          await submitInquiry({ name: n, phone: p, visaType: v, destination: d, timeSlot: ts, message: m });
         } catch (err) {
           console.error('Inquiry submission error:', err);
         }
