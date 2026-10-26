@@ -1,5 +1,19 @@
 [
   {
+    "id": "INQ-753717",
+    "name": "Aman Verma",
+    "phone": "+91 98111 22334",
+    "email": "aman.verma@example.com",
+    "visaType": "Study Visa",
+    "destination": "Poland",
+    "education": "",
+    "experience": "",
+    "timeSlot": "2:00 PM - 5:00 PM",
+    "message": "Testing inquiry from end-to-end API",
+    "status": "New",
+    "createdAt": "2026-10-26T07:34:57.537Z"
+  },
+  {
     "id": "INQ-087426",
     "name": "abhinav sharma",
     "phone": "+917982547576",

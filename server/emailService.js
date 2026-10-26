@@ -20,7 +20,9 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 export const sendInquiryNotification = async (inquiry) => {
   const apiKey = (process.env.RESEND_API_KEY || '').trim();
   const receiverEmail = (process.env.RECEIVER_EMAIL || process.env.NOTIFICATION_EMAIL || '').trim();
-  const fromEmail = (process.env.RESEND_FROM_EMAIL || 'Tansh Immigration <onboarding@resend.dev>').trim();
+  const fromEmail = (
+    process.env.RESEND_FROM_EMAIL || "Tansh Immigration <notifications@noreply.tanshimmigration.com>"
+  ).trim();
 
   if (!apiKey) {
     console.warn('[EmailService] ⚠️ RESEND_API_KEY is not configured in .env. Email skipped.');
