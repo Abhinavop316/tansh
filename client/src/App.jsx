@@ -3,29 +3,61 @@ import { getPageData, enhance, IMGS } from './siteEngine';
 import { submitInquiry } from './api';
 
 export default function App() {
-  const [currentHash, setCurrentHash] = useState(() => window.location.hash || '#/');
+  const getInitialPath = () => {
+    // If the URL has an old hash route like `#/about`, migrate cleanly to `/about`
+    if (window.location.hash && window.location.hash.startsWith('#/')) {
+      const clean = window.location.hash.slice(1);
+      window.history.replaceState(null, '', clean);
+      return clean;
+    }
+    if (window.location.hash === '#' || window.location.hash === '#/') {
+      window.history.replaceState(null, '', window.location.pathname || '/');
+    }
+    return window.location.pathname || '/';
+  };
+
+  const [currentPath, setCurrentPath] = useState(getInitialPath);
   const [lightbox, setLightbox] = useState({ isOpen: false, src: '', alt: '' });
   const appRef = useRef(null);
 
-  // Sync hash routing
+  // Clean navigation helper using HTML5 History API
+  const navigate = (path) => {
+    let clean = path;
+    if (clean.startsWith('#/')) clean = clean.slice(1);
+    if (!clean.startsWith('/')) clean = '/' + clean;
+    window.history.pushState(null, '', clean);
+    setCurrentPath(clean);
+    window.scrollTo(0, 0);
+  };
+
+  // Sync browser back/forward buttons & clean any leftover hashes
   useEffect(() => {
-    if (!window.location.hash || window.location.hash === '#') {
-      window.location.hash = '#/';
-    }
+    const onPopState = () => {
+      setCurrentPath(window.location.pathname || '/');
+    };
+    window.addEventListener('popstate', onPopState);
 
     const onHashChange = () => {
-      setCurrentHash(window.location.hash || '#/');
+      if (window.location.hash && window.location.hash.startsWith('#/')) {
+        const clean = window.location.hash.slice(1);
+        window.history.replaceState(null, '', clean);
+        setCurrentPath(clean);
+      }
     };
     window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
+
+    return () => {
+      window.removeEventListener('popstate', onPopState);
+      window.removeEventListener('hashchange', onHashChange);
+    };
   }, []);
 
-  // Current primary route identifier
-  const cleanPath = currentHash.replace(/^#\/?/, '').replace(/^\//, '');
+  // Current primary route identifier for active nav styling
+  const cleanPath = currentPath.replace(/^#\/?/, '').replace(/^\//, '');
   const activeNav = cleanPath.split('/')[0] || '';
 
   // Get exact page data
-  const pageData = getPageData(currentHash);
+  const pageData = getPageData(currentPath);
 
   // Update title & description, scroll to top, and trigger enhance animations
   useEffect(() => {
@@ -40,10 +72,37 @@ export default function App() {
     if (appRef.current) {
       enhance(appRef.current);
     }
-  }, [currentHash, pageData.h]);
+  }, [currentPath, pageData.h]);
 
   // Wire form submission to Express backend & lightbox global listeners
   useEffect(() => {
+    // Intercept internal link clicks for seamless SPA navigation without full page reloads
+    const handleLinkClick = (e) => {
+      const anchor = e.target.closest('a');
+      if (!anchor) return;
+
+      const href = anchor.getAttribute('href');
+      if (!href) return;
+
+      // Ignore external URLs, telephone, mailto, anchor IDs (#id), and new tab links
+      if (
+        href.startsWith('http://') ||
+        href.startsWith('https://') ||
+        href.startsWith('mailto:') ||
+        href.startsWith('tel:') ||
+        anchor.target === '_blank' ||
+        e.ctrlKey || e.metaKey || e.shiftKey
+      ) {
+        return;
+      }
+
+      // Route internal paths cleanly
+      if (href.startsWith('/') || href.startsWith('#/')) {
+        e.preventDefault();
+        navigate(href.replace(/^#\/?/, '/'));
+      }
+    };
+
     // Handle form submit globally
     const handleSubmit = async (e) => {
       const form = e.target.closest('form');
@@ -67,7 +126,7 @@ export default function App() {
         } catch (err) {
           console.error('Inquiry submission error:', err);
         }
-        window.location.hash = '#/thank-you';
+        navigate('/thank-you');
       }
     };
 
@@ -93,11 +152,13 @@ export default function App() {
       }
     };
 
+    document.addEventListener('click', handleLinkClick);
     document.addEventListener('submit', handleSubmit);
     document.addEventListener('click', handleGlobalClick);
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
+      document.removeEventListener('click', handleLinkClick);
       document.removeEventListener('submit', handleSubmit);
       document.removeEventListener('click', handleGlobalClick);
       window.removeEventListener('keydown', handleKeyDown);
@@ -109,17 +170,17 @@ export default function App() {
       <header>
         <div className="w">
           <nav aria-label="Main">
-            <a className="logo" href="#/">Tansh <b>Immigration</b></a>
-            <a className={`l ${activeNav === 'about' ? 'on' : ''}`} href="#/about">About</a>
-            <a className={`l ${activeNav === 'services' ? 'on' : ''}`} href="#/services">Services</a>
-            <a className={`l ${activeNav === 'destinations' ? 'on' : ''}`} href="#/destinations">Countries</a>
-            <a className={`l ${activeNav === 'blog' ? 'on' : ''}`} href="#/blog">Blog</a>
-            <a className={`l ${activeNav === 'why-us' ? 'on' : ''}`} href="#/why-us">Why us</a>
-            <a className={`l ${activeNav === 'results' ? 'on' : ''}`} href="#/results">Results</a>
-            <a className={`l ${activeNav === 'gallery' ? 'on' : ''}`} href="#/gallery">Gallery</a>
-            <a className={`l ${activeNav === 'reviews' ? 'on' : ''}`} href="#/reviews">Reviews</a>
-            <a className={`l ${activeNav === 'faq' ? 'on' : ''}`} href="#/faq">FAQ</a>
-            <a className="btn s" href="#/contact">Free consultation</a>
+            <a className="logo" href="/">Tansh <b>Immigration</b></a>
+            <a className={`l ${activeNav === 'about' ? 'on' : ''}`} href="/about">About</a>
+            <a className={`l ${activeNav === 'services' ? 'on' : ''}`} href="/services">Services</a>
+            <a className={`l ${activeNav === 'destinations' ? 'on' : ''}`} href="/destinations">Countries</a>
+            <a className={`l ${activeNav === 'blog' ? 'on' : ''}`} href="/blog">Blog</a>
+            <a className={`l ${activeNav === 'why-us' ? 'on' : ''}`} href="/why-us">Why us</a>
+            <a className={`l ${activeNav === 'results' ? 'on' : ''}`} href="/results">Results</a>
+            <a className={`l ${activeNav === 'gallery' ? 'on' : ''}`} href="/gallery">Gallery</a>
+            <a className={`l ${activeNav === 'reviews' ? 'on' : ''}`} href="/reviews">Reviews</a>
+            <a className={`l ${activeNav === 'faq' ? 'on' : ''}`} href="/faq">FAQ</a>
+            <a className="btn s" href="/contact">Free consultation</a>
           </nav>
         </div>
       </header>
@@ -137,19 +198,19 @@ export default function App() {
             </div>
             <div>
               <h3>Services</h3>
-              <a href="#/work-visa">Work visa</a>
-              <a href="#/study-visa">Study visa</a>
-              <a href="#/tourist-visa">Tourist visa</a>
-              <a href="#/jobs-abroad">Jobs abroad</a>
+              <a href="/work-visa">Work visa</a>
+              <a href="/study-visa">Study visa</a>
+              <a href="/tourist-visa">Tourist visa</a>
+              <a href="/jobs-abroad">Jobs abroad</a>
             </div>
             <div>
               <h3>Company</h3>
-              <a href="#/about">About us</a>
-              <a href="#/why-us">Why trust us</a>
-              <a href="#/results">Success rate and certificates</a>
-              <a href="#/partners">Partners</a>
-              <a href="#/gallery">Client gallery</a>
-              <a href="#/connect">Social media</a>
+              <a href="/about">About us</a>
+              <a href="/why-us">Why trust us</a>
+              <a href="/results">Success rate and certificates</a>
+              <a href="/partners">Partners</a>
+              <a href="/gallery">Client gallery</a>
+              <a href="/connect">Social media</a>
             </div>
             <div>
               <h3>Contact</h3>
