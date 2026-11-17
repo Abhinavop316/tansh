@@ -14,10 +14,10 @@ export const siteData = {
       full: "C-46 BPS Tower, RDC, Raj Nagar, Ghaziabad, Uttar Pradesh 201002"
     },
     contact: {
-      phone: "+91 92110 71319",
-      phoneRaw: "919211071319",
+      phone: "+91 92663 22923",
+      phoneRaw: "919266322923",
       email: "tanshimmigration@gmail.com",
-      whatsappUrl: "https://wa.me/919211071319?text=Hello%20Tansh%20Immigration,%20I%20am%20interested%20in%20a%20free%20profile%20assessment",
+      whatsappUrl: "https://wa.me/919266322923?text=Hello%20Tansh%20Immigration,%20I%20am%20interested%20in%20a%20free%20profile%20assessment",
       mapEmbedUrl: "https://maps.google.com/maps?q=C-46%20BPS%20Tower%2C%20RDC%2C%20Raj%20Nagar%2C%20Ghaziabad&t=m&z=16&output=embed"
     },
     stats: {
@@ -32,6 +32,7 @@ export const siteData = {
   destinations: {
     europe: {
       slug: "europe",
+      flag: "eu",
       name: "Europe and Schengen",
       title: "Europe & Schengen Work, Study and Tourist Visas",
       description: "Work and visa opportunities across European destinations, including Schengen-area markets, subject to available employers, vacancies and eligibility.",
@@ -50,6 +51,7 @@ export const siteData = {
     },
     gulf: {
       slug: "gulf",
+      flag: "ae",
       name: "Gulf Countries",
       title: "Gulf Countries Work and Employment Visas",
       description: "Employment-focused assistance across Gulf markets, including job opportunities where suitable vacancies and employer requirements are available.",
@@ -68,6 +70,7 @@ export const siteData = {
     },
     canada: {
       slug: "canada",
+      flag: "ca",
       name: "Canada",
       title: "Canada Work, Study Permit and Tourist Visas",
       description: "Work, study and visit pathways with full documentation and application support.",
@@ -86,6 +89,7 @@ export const siteData = {
     },
     uk: {
       slug: "uk",
+      flag: "gb",
       name: "United Kingdom",
       title: "United Kingdom Skilled Worker & Student Route Visas",
       description: "Profile assessment, documentation guidance and application coordination for the UK.",
@@ -104,6 +108,7 @@ export const siteData = {
     },
     australia: {
       slug: "australia",
+      flag: "au",
       name: "Australia",
       title: "Australia Skilled Worker & Subclass 500 Student Visas",
       description: "Dedicated counselling and application assistance with profile assessment and documentation guidance.",
@@ -122,6 +127,7 @@ export const siteData = {
     },
     nz: {
       slug: "nz",
+      flag: "nz",
       name: "New Zealand",
       title: "New Zealand Accredited Employer Work Visa & Study Visas",
       description: "Dedicated counselling and application assistance for work, study and visit categories in NZ.",
@@ -140,6 +146,7 @@ export const siteData = {
     },
     asia: {
       slug: "asia",
+      flag: "sg",
       name: "Asia",
       title: "Asian Markets Work and Visit Visas",
       description: "Work and visa assistance for selected Asian destinations, based on current job demand and immigration pathways.",
@@ -158,6 +165,7 @@ export const siteData = {
     },
     "north-america": {
       slug: "north-america",
+      flag: "us",
       name: "USA & North America",
       title: "United States Study (F-1), Visitor (B1/B2) & Specialty Pathways",
       description: "Work, tourist and study pathways for destinations such as Canada and the United States, subject to category-specific requirements.",
@@ -508,7 +516,7 @@ export const siteData = {
     },
     {
       q: "Do I need to visit your office in person?",
-      a: "An in-person consultation is helpful but not mandatory. Initial discussions can happen over phone (+91 92110 71319) or WhatsApp, and documents can be securely shared digitally. Our office is located at C-46 BPS Tower, RDC, Raj Nagar, Ghaziabad."
+      a: "An in-person consultation is helpful but not mandatory. Initial discussions can happen over phone (+91 92663 22923) or WhatsApp, and documents can be securely shared digitally. Our office is located at C-46 BPS Tower, RDC, Raj Nagar, Ghaziabad."
     },
     {
       q: "How do I get started?",

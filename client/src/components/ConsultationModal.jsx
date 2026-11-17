@@ -48,7 +48,7 @@ export default function ConsultationModal({ isOpen, onClose, defaultVisaType = '
       }
     } catch (err) {
       console.error(err);
-      setError(err.message || 'Something went wrong. Please call us directly at +91 92110 71319.');
+      setError(err.message || 'Something went wrong. Please call us directly at +91 92663 22923.');
     } finally {
       setLoading(false);
     }
@@ -141,7 +141,7 @@ export default function ConsultationModal({ isOpen, onClose, defaultVisaType = '
                     type="tel" 
                     className="form-input" 
                     required 
-                    placeholder="+91 92110 71319"
+                    placeholder="+91 92663 22923"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   />

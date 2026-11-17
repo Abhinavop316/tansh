@@ -43,7 +43,7 @@ export default function Contact() {
       } catch (err) {}
     } catch (err) {
       console.error(err);
-      setError(err.message || 'Error submitting request. Please call us at +91 92110 71319.');
+      setError(err.message || 'Error submitting request. Please call us at +91 92663 22923.');
     } finally {
       setLoading(false);
     }
@@ -129,7 +129,7 @@ export default function Contact() {
                         type="tel" 
                         className="form-input" 
                         required 
-                        placeholder="+91 92110 71319"
+                        placeholder="+91 92663 22923"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       />

@@ -111,7 +111,7 @@ export default function About({ onOpenConsultation }) {
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 16 }}>
             <Link to="/contact" className="btn btn-primary">Office Directions &amp; Contact</Link>
-            <a href="tel:+919211071319" className="btn btn-outline">Call +91 92110 71319</a>
+            <a href="tel:+919266322923" className="btn btn-outline">Call +91 92663 22923</a>
           </div>
         </div>
       </div>

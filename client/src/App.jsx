@@ -216,7 +216,7 @@ export default function App() {
               <h3>Contact</h3>
               <p>
                 C-46 BPS Tower, RDC, Raj Nagar, Ghaziabad<br />
-                +91 92110 71319<br />
+                +91 92663 22923<br />
                 tanshimmigration@gmail.com
               </p>
             </div>
@@ -225,7 +225,7 @@ export default function App() {
         </div>
       </footer>
 
-      <a className="wa" href="https://wa.me/919211071319" rel="noopener">
+      <a className="wa" href="https://wa.me/919266322923" rel="noopener">
         WhatsApp us
       </a>
 

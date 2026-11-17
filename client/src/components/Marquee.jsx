@@ -1,5 +1,4 @@
 import React from 'react';
-import { Plane } from 'lucide-react';
 import { siteData } from '../data/siteData';
 
 export default function Marquee() {
@@ -12,7 +11,14 @@ export default function Marquee() {
       <div className="marquee-track">
         {items.map((dest, idx) => (
           <div key={`${dest.slug}-${idx}`} className="marquee-item">
-            <Plane size={15} className="marquee-icon" />
+            <img
+              src={`https://flagcdn.com/w20/${dest.flag}.png`}
+              width="20"
+              height="15"
+              alt={dest.name}
+              className="marquee-flag"
+              loading="lazy"
+            />
             <span>{dest.name}</span>
           </div>
         ))}
